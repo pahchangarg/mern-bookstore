@@ -7,11 +7,13 @@ const path = require("path");
 
 const errorMiddleware = require("./middleware/error");
 const passport = require("passport");
+const authRouter = require("./routes/auth");
 
+app.use("/api/v1", authRouter);
 // Passport config
-require("./config/passport")(passport);
 
 app.use(passport.initialize());
+require("./config/passport")(passport);
 
 // Config
 if (process.env.NODE_ENV !== "PRODUCTION") {
